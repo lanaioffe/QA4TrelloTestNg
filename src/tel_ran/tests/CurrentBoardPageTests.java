@@ -149,6 +149,56 @@ public class CurrentBoardPageTests extends TestBase{
         Assert.assertEquals(quantityAddAnotherButtonBeg+1, quantityAddAnotherButtonEnd);
     }
 
+    @Test
+    public void createCopyOfFirstList()  {
+
+        //----Open 'QA 4 Auto' board
+        waitUntilElementIsVisible(By.xpath("//div[@class='board-tile-details-name']"),20);
+        driver.findElement(By.xpath("//div[@class='board-tile-details-name']")).click();
+        waitUntilElementIsClickable(By.cssSelector(".placeholder"),30);
+
+        WebElement addListButton = driver.findElement(By.cssSelector(".placeholder"));
+        String nameAddListButton = addListButton.getText();
+        addListButton.click();
+        waitUntilElementIsVisible(By.cssSelector(".list-name-input"),10);
+        String str = genRandomString(7);
+        System.out.println("Name button - " + nameAddListButton);
+
+        if(nameAddListButton.equals("Add a list")){       //-----Add a new list if doesn't exist------
+            driver.findElement(By.xpath("//input[@class='list-name-input']")).sendKeys(str);//добавление нового листа
+            driver.findElement(By.xpath("//input[@class='primary mod-list-add-button js-save-edit']")).click();
+            waitUntilElementIsVisible(By.cssSelector("span.placeholder"),10);
+        }
+
+        int quantityListAtFirst = driver.findElements(By.xpath("//h2")).size();
+
+//            ------- doing a copy-------
+        String nameOfFirstList = driver.findElement(By
+                .xpath("//textarea[@class='list-header-name mod-list-name js-list-name-input']")).getText();
+        driver.findElement(By.cssSelector(".list-name-input")).sendKeys(nameOfFirstList);
+        driver.findElement(By.xpath("//input[@class='primary mod-list-add-button js-save-edit']")).click();
+        waitUntilElementIsVisible(By.cssSelector("span.placeholder"),10);
+
+        int quantityListAtTheEnd = driver.findElements(By.xpath("//h2")).size();
+        System.out.println("size before: " + quantityListAtFirst);
+        System.out.println("size after: " + quantityListAtTheEnd);
+
+        boolean exitName = false;
+
+        for(WebElement element: driver.findElements(By.xpath("//h2/../textarea"))){
+            for (int i = 1; i <= quantityListAtTheEnd; i++){
+                if(element.getText().equals(nameOfFirstList)) {
+                    exitName = true;
+                }
+            }
+        }
+
+        Assert.assertTrue(exitName);
+        Assert.assertEquals(quantityListAtFirst+1,quantityListAtTheEnd);
+
+    }
+
+
     public static String genRandomString(int num){
         String str = "";
         int number;
