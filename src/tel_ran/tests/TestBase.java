@@ -3,6 +3,7 @@ package tel_ran.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -12,17 +13,19 @@ import tel_ran.helpers.HomePageHelper;
 public class TestBase {
     public static final String LOGIN = "lanaioffe@mail.ru";
     public static final String PASSWORD = "Rainbow02";
+
     WebDriver driver;
     HomePageHelper homePage;
 
     @BeforeMethod
     public void setUp() throws InterruptedException {
         driver = new ChromeDriver();
-        homePage = new HomePageHelper(driver);
+        homePage = PageFactory.initElements(driver, HomePageHelper.class);
+//        homePage = new HomePageHelper(driver);
         //===========Enter to Trello====
         driver.get("https://trello.com/");
 //        driver.manage().window().fullscreen();
-        //Thread.sleep(5000);
+
 //        waitUntilElementIsClickable(By.xpath("//a[@class='btn btn-sm btn-link text-white']"),40);
         homePage.waitUntilPageIsLoaded();
     }

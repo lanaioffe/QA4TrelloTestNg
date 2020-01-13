@@ -3,43 +3,60 @@ package tel_ran.helpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 
 public class LoginPageHelper extends PageBase{
-//    WebDriver driver;
+    @FindBy (id = "login")
+    WebElement loginButton;
+
+    @FindBy (id = "user")
+    WebElement userField;
+
+    @FindBy (xpath = "//button[@id='login-submit']//span[contains(text(),'Log in')]")
+    WebElement theSecondLoginButton;
+
+    @FindBy (xpath = "//button[@id='login-submit']//span[contains(text(),'Continue')]")
+    WebElement continueButton;
+
+    @FindBy (id = "password")
+    WebElement passwordButton;
+
+    @FindBy (xpath = "//div[@id = 'login-error']/span")
+    WebElement passwordErrorMessage;
+
+    @FindBy (xpath = "//p[@class = 'error-message']")
+    WebElement loginErrorMessage;
+
 
     public LoginPageHelper(WebDriver driver){
         super(driver);
     }
 
     public void waitUntilPageIsLoaded(){
-        waitUntilElementIsClickable(By.id("login"),30);
+        waitUntilElementIsClickable(loginButton,30);
     }
 
-
     public void enterAtlLogin(String login) {
-        WebElement userField = driver.findElement(By.id("user"));
-        userField.click();
-        userField.clear();
-        userField.sendKeys(login);
+       enterValueToTheField(userField, login);
     }
 
     public void clickLoginWithAtlassian() {
-        waitUntilElementIsClickable(By.id("login"), 10);
-        driver.findElement(By.id("login")).click();
+        waitUntilElementIsClickable(loginButton, 10);
+        loginButton.click();
     }
 
     public void clickContinueButton() {
-        waitUntilElementIsClickable(By.id("login-submit"),30);
-        driver.findElement(By.id("login-submit")).click();
+        waitUntilElementIsClickable(continueButton,30);
+        continueButton.click();
     }
 
     public void enterAtlPasswordAndLogin(String password) {
-        waitUntilElementIsClickable(By.id("password"),30);
-        waitUntilElementIsClickable(By.id("login-submit"),30);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login-submit")).click();
+        waitUntilElementIsClickable(passwordButton,30);
+        waitUntilElementIsClickable(theSecondLoginButton,30);
+        passwordButton.sendKeys(password);
+        theSecondLoginButton.click();
     }
 
     public void loginToTrelloAsAtlassian(String login, String password){
@@ -50,31 +67,28 @@ public class LoginPageHelper extends PageBase{
     }
 
     public void waitUntilPasswordError() {
-        waitUntilElementIsVisible(By.xpath("//div[@id = 'login-error']/span"),10);
+        waitUntilElementIsVisible(passwordErrorMessage,10);
     }
 
     public boolean verifyIfPasswordErrorIsCorrect(){
-        return driver.findElement(By.xpath("//div[@id = 'login-error']/span")).getText()
-                .contains("Incorrect email address and / or password.");
+        return passwordErrorMessage.getText().contains("Incorrect email address and / or password.");
     }
 
     public void enterLogin(String login){
-        WebElement loginField = driver.findElement(By.id("user"));
-        loginField.click();
-        loginField.clear();
-        loginField.sendKeys(login);
+        userField.click();
+        userField.clear();
+        userField.sendKeys(login);
     }
 
     public void enterPassword(String password){
-        WebElement passwordField = driver.findElement(By.id("password"));
-        passwordField.click();
-        passwordField.clear();
-        passwordField.sendKeys(password);
+        passwordButton.click();
+        passwordButton.clear();
+        passwordButton.sendKeys(password);
     }
 
     public void clickLogin() {
-        waitUntilElementIsClickable(By.id("login"), 10);
-        driver.findElement(By.id("login")).click();
+        waitUntilElementIsClickable(loginButton, 10);
+        loginButton.click();
     }
 
     public void loginToTrello (String login, String password){
@@ -84,12 +98,15 @@ public class LoginPageHelper extends PageBase{
     }
 
     public void waitUntilLoginError() {
-        waitUntilElementIsVisible(By.xpath("//p[@class = 'error-message']"),20);
-        System.out.println("Error text: " + driver.findElement(By.xpath("//p[@class = 'error-message']")).getText());
+        this.clickLogin();
+        waitUntilElementIsVisible(loginErrorMessage,20);
+        System.out.println("Error text: " + loginErrorMessage.getText());
     }
 
     public boolean verifyIfLoginErrorIsCorrect(){
-        return driver.findElement(By.xpath("//p[@class = 'error-message']")).getText().contains("There isn't an account for this email");
+        return loginErrorMessage.getText().contains("There isn't an account for this email");
     }
+
+
 
 }
