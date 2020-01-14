@@ -44,7 +44,6 @@ public class UserProfilePageTests extends TestBase {
     @Test
     public void initialsVerification(){
         String initials = userProfile.getInitialsFromInitialsField();
-//                driver.findElement(By.xpath("//input[@name='initials']")).getAttribute("value");
 
         Assert.assertTrue(userProfile.verifyIfInitialsDisplayedCorrectly(initials), "Not all elements contains correct initials. It should be two elements");
 

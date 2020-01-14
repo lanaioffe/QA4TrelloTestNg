@@ -29,15 +29,11 @@ public class LoginPageTests extends TestBase {
     }
 
     @Test
-    public void loginToTrelloPositive() throws InterruptedException {
+    public void loginToTrelloPositive()  {
 
         homePage.openLoginPage();
         loginPage.waitUntilPageIsLoaded();
         loginPage.loginToTrelloAsAtlassian(LOGIN, PASSWORD);
-//        loginPage.enterAtlLogin(LOGIN);
-//        loginPage.clickLoginWithAtlassian();
-//        loginPage.clickContinueButton();
-//        loginPage.enterAtlPasswordAndLogin(PASSWORD);
         boardsPage.waitUntilPageIsLoaded();
 
         Assert.assertTrue(boardsPage.verifyIfBoardsIconIsDisplayed());
@@ -46,7 +42,7 @@ public class LoginPageTests extends TestBase {
 
 
     @Test
-    public void loginIncorrectPassNegative() throws InterruptedException {
+    public void loginIncorrectPassNegative()  {
         homePage.openLoginPage();
         loginPage.waitUntilPageIsLoaded();
         loginPage.loginToTrelloAsAtlassian(LOGIN, PASSWORD + "1");

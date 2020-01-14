@@ -60,7 +60,7 @@ public abstract class PageBase {
         }
     }
 
-    public void waitUntilAllElementsAreVisible(List<WebElement> element, int time) {
+    public void waitUntilAllElementsAreVisible (List<WebElement> element, int time) {
         try {
             new WebDriverWait(driver,time).until(ExpectedConditions
                     .visibilityOfAllElements(element));

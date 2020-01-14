@@ -18,7 +18,7 @@ public class TestBase {
     HomePageHelper homePage;
 
     @BeforeMethod
-    public void setUp() throws InterruptedException {
+    public void setUp()  {
         driver = new ChromeDriver();
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
 //        homePage = new HomePageHelper(driver);
@@ -26,7 +26,6 @@ public class TestBase {
         driver.get("https://trello.com/");
 //        driver.manage().window().fullscreen();
 
-//        waitUntilElementIsClickable(By.xpath("//a[@class='btn btn-sm btn-link text-white']"),40);
         homePage.waitUntilPageIsLoaded();
     }
 
@@ -35,30 +34,30 @@ public class TestBase {
         driver.quit();
     }
 
-    public void waitUntilElementIsVisible(By locator, int time) {
-        try {
-            new WebDriverWait(driver,time).until(ExpectedConditions
-                    .visibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void waitUntilElementIsClickable(By locator, int time) {
-        try {
-            new WebDriverWait(driver,time).until(ExpectedConditions
-                    .elementToBeClickable(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void waitUntilAllElementsAreVisible(By locator, int time) {
-        try {
-            new WebDriverWait(driver,time).until(ExpectedConditions
-                    .visibilityOfAllElementsLocatedBy(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void waitUntilElementIsVisible(By locator, int time) {
+//        try {
+//            new WebDriverWait(driver,time).until(ExpectedConditions
+//                    .visibilityOfElementLocated(locator));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void waitUntilElementIsClickable(By locator, int time) {
+//        try {
+//            new WebDriverWait(driver,time).until(ExpectedConditions
+//                    .elementToBeClickable(locator));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void waitUntilAllElementsAreVisible(By locator, int time) {
+//        try {
+//            new WebDriverWait(driver,time).until(ExpectedConditions
+//                    .visibilityOfAllElementsLocatedBy(locator));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
