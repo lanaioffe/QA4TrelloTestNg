@@ -19,6 +19,11 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp()  {
+        /*------- To change language-------
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--lang=" + "en");
+        driver = new ChromeDriver(options);*/
+
         driver = new ChromeDriver();
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
 //        homePage = new HomePageHelper(driver);
