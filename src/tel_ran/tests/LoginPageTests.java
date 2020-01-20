@@ -15,6 +15,7 @@ import tel_ran.helpers.BoardsPageHelper;
 import tel_ran.helpers.HomePageHelper;
 import tel_ran.helpers.LoginPageHelper;
 
+
 public class LoginPageTests extends TestBase {
 
     HomePageHelper homePage;
@@ -45,8 +46,8 @@ public class LoginPageTests extends TestBase {
     public void loginIncorrectPassNegative()  {
         homePage.openLoginPage();
         loginPage.waitUntilPageIsLoaded();
-        loginPage.loginToTrelloAsAtlassian(LOGIN, PASSWORD + "1");
-        loginPage.waitUntilPasswordError();
+        loginPage.loginToTrelloAsAtlassian(LOGIN, PASSWORD + "1")
+                .waitUntilPasswordError();
 
         Assert.assertTrue(loginPage.verifyIfPasswordErrorIsCorrect(), "Error message is not correct");
 
@@ -57,8 +58,8 @@ public class LoginPageTests extends TestBase {
         homePage.openLoginPage();
         loginPage.waitUntilPageIsLoaded();
 //        loginPage.loginToTrello(LOGIN + "1", PASSWORD);
-        loginPage.loginToTrello("abc@mai.com", "hjdhj");
-        loginPage.waitUntilLoginError();
+        loginPage.loginToTrello("abc@mai.com", "hjdhj")
+                .waitUntilLoginError();
         Assert.assertTrue(loginPage.verifyIfLoginErrorIsCorrect(), "Error login message is not correct");
     }
 

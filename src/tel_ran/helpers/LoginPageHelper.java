@@ -38,8 +38,9 @@ public class LoginPageHelper extends PageBase{
         waitUntilElementIsClickable(loginButton,30);
     }
 
-    public void enterAtlLogin(String login) {
-       enterValueToTheField(userField, login);
+    public void  enterAtlLogin(String login) {
+        enterValueToTheField(userField, login);
+
     }
 
     public void clickLoginWithAtlassian() {
@@ -59,15 +60,17 @@ public class LoginPageHelper extends PageBase{
         theSecondLoginButton.click();
     }
 
-    public void loginToTrelloAsAtlassian(String login, String password){
+    public LoginPageHelper loginToTrelloAsAtlassian(String login, String password){
         this.enterAtlLogin(login);
         this.clickLoginWithAtlassian();
         this.clickContinueButton();
         this.enterAtlPasswordAndLogin(password);
+        return this;
     }
 
-    public void waitUntilPasswordError() {
+    public LoginPageHelper waitUntilPasswordError() {
         waitUntilElementIsVisible(passwordErrorMessage,10);
+        return this;
     }
 
     public boolean verifyIfPasswordErrorIsCorrect(){
@@ -91,16 +94,18 @@ public class LoginPageHelper extends PageBase{
         loginButton.click();
     }
 
-    public void loginToTrello (String login, String password){
+    public LoginPageHelper loginToTrello (String login, String password){
         this.enterLogin(login);
         this.enterPassword(password);
         this.clickLogin();
+        return this;
     }
 
-    public void waitUntilLoginError() {
+    public LoginPageHelper waitUntilLoginError() {
         this.clickLogin();
         waitUntilElementIsVisible(loginErrorMessage,20);
         System.out.println("Error text: " + loginErrorMessage.getText());
+        return this;
     }
 
     public boolean verifyIfLoginErrorIsCorrect(){

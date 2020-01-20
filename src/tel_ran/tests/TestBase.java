@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import tel_ran.helpers.HomePageHelper;
 
+
 public class TestBase {
     public static final String LOGIN = "lanaioffe@mail.ru";
     public static final String PASSWORD = "Rainbow02";
